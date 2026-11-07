@@ -339,16 +339,6 @@
       line-height: 1;
     }
 
-    /* ========== НОВЫЙ КЛАСС ДЛЯ КАРТИНОК ========== */
-    .card-img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      display: block;
-    }
-
     .card h3 {
       margin-bottom: 8px;
     }
@@ -734,9 +724,7 @@
 
         <div class="card-grid">
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145506.png"
-                 alt="Иллюстрация к направлению «Анализ данных»">
+            <div class="card-icon" aria-hidden="true">📊</div>
             <h3>Анализ данных</h3>
             <p>
               Работа с таблицами и открытыми наборами данных: очистка, сводные таблицы,
@@ -747,9 +735,7 @@
           </article>
 
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145524.png"
-                 alt="Иллюстрация к направлению «Машинное обучение»">
+            <div class="card-icon" aria-hidden="true">🤖</div>
             <h3>Машинное обучение</h3>
             <p>
               Обучение моделей на примерах: модель находит закономерности в данных
@@ -760,9 +746,7 @@
           </article>
 
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145543.png"
-                 alt="Иллюстрация к направлению «Нейросети»">
+            <div class="card-icon" aria-hidden="true">🧠</div>
             <h3>Нейросети</h3>
             <p>
               Использование готовых нейросетевых моделей: распознавание изображений,
@@ -830,9 +814,6 @@
 
         <div class="project-grid">
           <article class="project-card" id="project-dataset">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145506.png"
-                 alt="Иллюстрация к проекту «Анализ открытого датасета»">
             <span class="project-level level-easy">Начальный</span>
             <h3>Анализ открытого датасета</h3>
             <p>
@@ -848,9 +829,6 @@
           </article>
 
           <article class="project-card" id="project-chatbot">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145524.png"
-                 alt="Иллюстрация к проекту «Чат-бот на готовой модели»">
             <span class="project-level level-mid">Средний</span>
             <h3>Чат-бот на готовой модели</h3>
             <p>
@@ -866,9 +844,6 @@
           </article>
 
           <article class="project-card" id="project-images">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145543.png"
-                 alt="Иллюстрация к проекту «Распознавание изображений»">
             <span class="project-level level-hard">Продвинутый старт</span>
             <h3>Распознавание изображений</h3>
             <p>
@@ -897,11 +872,99 @@
 
         <div class="quiz-wrapper">
           <form id="quiz-form" novalidate>
-            <!-- ... остальное содержимое формы теста без изменений ... -->
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+            <!-- Пошаговый тест: один вопрос за раз.
+                 После каждого шага фокус переводится на заголовок нового шага. -->
+
+            <!-- Шаг 1 -->
+            <div class="quiz-step" data-step="0">
+              <p class="quiz-progress" aria-hidden="true">Шаг 1 из 4</p>
+              <h3 id="q1-heading" tabindex="-1">1. Насколько вам комфортна математика?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q1-heading">
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="1">
+                  <span>Хочу минимум формул — достаточно таблиц и графиков</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="2">
+                  <span>Готов(а) разобраться с базовыми формулами</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q1" value="3">
+                  <span>Интересно понять, как работают модели изнутри</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Шаг 2 -->
+            <div class="quiz-step" data-step="1" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 2 из 4</p>
+              <h3 id="q2-heading" tabindex="-1">2. Есть ли у вас опыт программирования?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q2-heading">
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="1">
+                  <span>Нет, но готов(а) учиться на простых примерах</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="2">
+                  <span>Пробовал(а) немного, знаю базовые конструкции</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q2" value="3">
+                  <span>Уверенно пишу небольшие программы</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Шаг 3 -->
+            <div class="quiz-step" data-step="2" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 3 из 4</p>
+              <h3 id="q3-heading" tabindex="-1">3. Что вам интереснее делать?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q3-heading">
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="1">
+                  <span>Искать закономерности в таблицах и цифрах</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="2">
+                  <span>Создавать что-то интерактивное: ботов, диалоги</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q3" value="3">
+                  <span>Работать с картинками и визуальными данными</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Шаг 4 -->
+            <div class="quiz-step" data-step="3" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 4 из 4</p>
+              <h3 id="q4-heading" tabindex="-1">4. Сколько времени вы готовы уделять проекту в неделю?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q4-heading">
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="1">
+                  <span>2–3 часа — хочу начать с малого</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="2">
+                  <span>4–6 часов — готов(а) к регулярной работе</span>
+                </label>
+                <label class="quiz-option">
+                  <input type="radio" name="q4" value="3">
+                  <span>7+ часов — хочу погрузиться серьёзно</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" id="quiz-back" class="btn btn-secondary" hidden>Назад</button>
+              <button type="button" id="quiz-next" class="btn btn-primary">Далее</button>
+              <button type="submit" id="quiz-submit" class="btn btn-primary" hidden>Показать результат</button>
+              <button type="button" id="quiz-reset" class="btn btn-secondary">Сбросить</button>
+            </div>
+
+            <p class="quiz-error" id="quiz-error" role="alert">
+              Пожалуйста, выберите один вариант, чтобы продолжить.
+            </p>
+
+            <!-- Результат. tabindex="-1" для программного фокуса -->
+            <div class="quiz-result
