@@ -7,688 +7,153 @@
   <title>DataStart — начни путь в прикладном ИИ и анализе данных</title>
   <style>
     /* ========== БАЗОВЫЕ СБРОСЫ И ПЕРЕМЕННЫЕ ========== */
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      /* Светлая чистая тема с 3 акцентами */
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #1e293b;
-      --text-muted: #475569;
-      --accent-1: #2563eb;   /* синий */
-      --accent-2: #0d9488;   /* бирюзовый */
-      --accent-3: #d97706;   /* янтарный */
-      --border: #e2e8f0;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
-      --radius: 14px;
-      --header-height: 64px;
-      --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --bg: #f8fafc; --surface: #ffffff; --text: #1e293b; --text-muted: #475569;
+      --accent-1: #2563eb; --accent-2: #0d9488; --accent-3: #d97706;
+      --border: #e2e8f0; --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1); --radius: 14px;
+      --header-height: 64px; --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Уважаем настройку «уменьшить движение» */
+    html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
-
-    body {
-      font-family: var(--font-base);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 16px;
-      /* overflow-x:hidden убран — не маскируем возможные баги вёрстки */
-    }
-
-    /* Компенсация фиксированной шапки при якорных переходах.
-       Значение с запасом, чтобы на мобильных при переносе меню
-       заголовки секций не уходили под шапку. */
-    section[id],
-    footer[id] {
-      scroll-margin-top: 128px;
-    }
-
-    @media (min-width: 721px) {
-      section[id],
-      footer[id] {
-        scroll-margin-top: 84px;
-      }
-    }
+    body { font-family: var(--font-base); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; }
+    section[id], footer[id] { scroll-margin-top: 128px; }
+    @media (min-width: 721px) { section[id], footer[id] { scroll-margin-top: 84px; } }
 
     /* ========== ТИПОГРАФИКА И ОБЩИЕ КОНТЕЙНЕРЫ ========== */
-    h1, h2, h3 {
-      line-height: 1.25;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    h1 {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-    }
-
-    h2 {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      margin-bottom: 0.75rem;
-    }
-
-    h3 {
-      font-size: clamp(1.1rem, 2vw, 1.3rem);
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--text-muted);
-      max-width: 70ch;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .section {
-      padding: 56px 0;
-    }
-
-    .section--alt {
-      background: var(--surface);
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    /* Исправлено: подзаголовок тоже по центру */
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      margin: 0 auto 40px;
-      font-size: 1.05rem;
-      max-width: 60ch;
-    }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
-    }
+    h1, h2, h3 { line-height: 1.25; font-weight: 700; color: var(--text); }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+    h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.75rem; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.3rem); margin-bottom: 0.5rem; }
+    p { color: var(--text-muted); max-width: 70ch; }
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .section { padding: 56px 0; }
+    .section--alt { background: var(--surface); }
+    .section-title { text-align: center; margin-bottom: 8px; }
+    .section-subtitle { text-align: center; color: var(--text-muted); margin: 0 auto 40px; font-size: 1.05rem; max-width: 60ch; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     /* ========== ШАПКА И НАВИГАЦИЯ ========== */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(248, 250, 252, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: var(--header-height);
-      gap: 12px;
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: var(--accent-1);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      white-space: nowrap;
-      padding: 8px 0;
-    }
-
-    .logo span {
-      color: var(--accent-2);
-    }
-
-    .nav-list {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      list-style: none;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-list a {
-      display: inline-block;
-      padding: 8px 12px;
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      border-radius: 8px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .nav-list a:hover,
-    .nav-list a:focus-visible {
-      background: #e8eefc;
-      color: var(--accent-1);
-      outline: none;
-    }
-
-    /* Мобильная навигация */
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(248, 250, 252, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; min-height: var(--header-height); gap: 12px; }
+    .logo { font-weight: 800; font-size: 1.25rem; color: var(--accent-1); text-decoration: none; letter-spacing: -0.02em; white-space: nowrap; padding: 8px 0; }
+    .logo span { color: var(--accent-2); }
+    .nav-list { display: flex; align-items: center; gap: 4px; list-style: none; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-list a { display: inline-block; padding: 8px 12px; text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; border-radius: 8px; transition: background 0.2s, color 0.2s; }
+    .nav-list a:hover, .nav-list a:focus-visible { background: #e8eefc; color: var(--accent-1); outline: none; }
     @media (max-width: 720px) {
-      .header-inner {
-        flex-direction: column;
-        justify-content: center;
-        padding: 8px 0;
-        gap: 4px;
-      }
-      .nav-list {
-        justify-content: center;
-        gap: 2px;
-      }
-      .nav-list a {
-        padding: 6px 9px;
-        font-size: 0.85rem;
-      }
+      .header-inner { flex-direction: column; justify-content: center; padding: 8px 0; gap: 4px; }
+      .nav-list { justify-content: center; gap: 2px; }
+      .nav-list a { padding: 6px 9px; font-size: 0.85rem; }
     }
 
     /* ========== КНОПКИ ========== */
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      text-align: center;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
-    }
-
-    .btn-primary {
-      background: var(--accent-1);
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus-visible {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-      outline: 3px solid #93c5fd;
-      outline-offset: 2px;
-    }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--accent-1);
-      border: 2px solid var(--accent-1);
-    }
-
-    .btn-secondary:hover,
-    .btn-secondary:focus-visible {
-      background: #eef2ff;
-      transform: translateY(-2px);
-      outline: 3px solid #93c5fd;
-      outline-offset: 2px;
-    }
+    .btn { display: inline-block; padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 1rem; text-decoration: none; text-align: center; cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.2s, background 0.2s; }
+    .btn-primary { background: var(--accent-1); color: #ffffff; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); }
+    .btn-primary:hover, .btn-primary:focus-visible { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4); outline: 3px solid #93c5fd; outline-offset: 2px; }
+    .btn-secondary { background: var(--surface); color: var(--accent-1); border: 2px solid var(--accent-1); }
+    .btn-secondary:hover, .btn-secondary:focus-visible { background: #eef2ff; transform: translateY(-2px); outline: 3px solid #93c5fd; outline-offset: 2px; }
 
     /* ========== HERO ========== */
-    .hero {
-      padding: 72px 0 64px;
-      background: linear-gradient(160deg, #eef2ff 0%, var(--bg) 70%);
-      text-align: center;
-    }
-
-    .hero h1 {
-      max-width: 22ch;
-      margin: 0 auto 16px;
-    }
-
-    .hero p {
-      margin: 0 auto 32px;
-      font-size: 1.1rem;
-      max-width: 56ch;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: #dcfce7;
-      color: #166534;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
-    }
-
-    /* Мобильный порядок: сначала заголовок и текст, потом бейдж,
-       затем кнопки. «Мешающий» бейдж уходит ниже текста. */
+    .hero { padding: 72px 0 64px; background: linear-gradient(160deg, #eef2ff 0%, var(--bg) 70%); text-align: center; }
+    .hero h1 { max-width: 22ch; margin: 0 auto 16px; }
+    .hero p { margin: 0 auto 32px; font-size: 1.1rem; max-width: 56ch; }
+    .hero-badge { display: inline-block; margin-bottom: 20px; padding: 6px 16px; border-radius: 999px; background: #dcfce7; color: #166534; font-size: 0.85rem; font-weight: 600; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
     @media (max-width: 720px) {
-      .hero .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero .hero-badge {
-        order: 1;
-        margin-bottom: 14px;
-      }
+      .hero .container { display: flex; flex-direction: column; align-items: center; }
+      .hero .hero-badge { order: 1; margin-bottom: 14px; }
       .hero h1 { order: 2; }
-      .hero p  { order: 3; }
+      .hero p { order: 3; }
       .hero .hero-actions { order: 4; width: 100%; }
     }
 
     /* ========== КАРТОЧКИ НАПРАВЛЕНИЙ ========== */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px 22px; border: 1px solid var(--border); transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+    .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+    .card-icon { font-size: 2rem; margin-bottom: 12px; line-height: 1; }
+    
+    /* Стили для картинок */
+    .card-img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; display: block; }
 
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px 22px;
-      border: 1px solid var(--border);
-      transition: box-shadow 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
-
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    /* ========== НОВЫЙ КЛАСС ДЛЯ КАРТИНОК ========== */
-    .card-img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      display: block;
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      flex: 1;
-    }
-
-    .card-tag {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      align-self: flex-start;
-    }
-
+    .card h3 { margin-bottom: 8px; }
+    .card p { font-size: 0.95rem; flex: 1; }
+    .card-tag { display: inline-block; margin-top: 14px; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; align-self: flex-start; }
     .tag-blue { background: #dbeafe; color: #1e40af; }
     .tag-teal { background: #ccfbf1; color: #115e59; }
     .tag-amber { background: #fef3c7; color: #92400e; }
 
     /* ========== МИФЫ ========== */
-    .myth-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-      list-style: none;
-      padding: 0;
-    }
-
-    .myth-item {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      border-left: 4px solid var(--accent-3);
-    }
-
-    .myth-item .myth-q {
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-      font-size: 1rem;
-    }
-
-    .myth-item .myth-a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+    .myth-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; list-style: none; padding: 0; }
+    .myth-item { background: var(--surface); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--accent-3); }
+    .myth-item .myth-q { font-weight: 700; color: var(--text); margin-bottom: 6px; font-size: 1rem; }
+    .myth-item .myth-a { color: var(--text-muted); font-size: 0.95rem; }
 
     /* ========== ПРОЕКТЫ ========== */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
-    }
-
-    .project-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px 22px;
-      border: 2px solid transparent;
-      transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .project-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
-
-    .project-card.highlight {
-      border-color: var(--accent-2);
-      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15), var(--shadow);
-    }
-
-    .project-level {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      align-self: flex-start;
-    }
-
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+    .project-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px 22px; border: 2px solid transparent; transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s; display: flex; flex-direction: column; position: relative; }
+    .project-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+    .project-card.highlight { border-color: var(--accent-2); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15), var(--shadow); }
+    .project-level { display: inline-block; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; align-self: flex-start; }
     .level-easy { background: #dcfce7; color: #166534; }
     .level-mid { background: #fef3c7; color: #92400e; }
     .level-hard { background: #ede9fe; color: #5b21b6; }
-
-    .project-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 8px;
-    }
-
-    .project-card p {
-      font-size: 0.94rem;
-      flex: 1;
-      margin-bottom: 16px;
-    }
-
-    .project-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
-    }
-
-    .project-meta span {
-      background: #f1f5f9;
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
+    .project-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .project-card p { font-size: 0.94rem; flex: 1; margin-bottom: 16px; }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 14px; }
+    .project-meta span { background: #f1f5f9; padding: 4px 10px; border-radius: 8px; }
 
     /* ========== ТЕСТ ========== */
-    .quiz-wrapper {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px 26px;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .quiz-step {
-      margin-bottom: 26px;
-    }
-
-    .quiz-step[hidden] {
-      display: none;
-    }
-
-    .quiz-step h3 {
-      font-size: 1.05rem;
-      margin-bottom: 14px;
-    }
-
-    /* Заголовок шага, получающий программный фокус, — без рамки,
-       но фокус реально установлен, чтобы скринридер прочитал шаг */
-    .quiz-step h3:focus {
-      outline: none;
-    }
-    .quiz-step h3:focus-visible {
-      outline: 2px dashed var(--accent-1);
-      outline-offset: 4px;
-      border-radius: 4px;
-    }
-
-    .quiz-progress {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .quiz-option {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 12px 16px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-      font-size: 0.95rem;
-      color: var(--text);
-      background: #fafbfc;
-    }
-
-    .quiz-option:hover {
-      border-color: #93c5fd;
-      background: #f0f7ff;
-    }
-
-    /* Видимая рамка, когда фокус внутри варианта — клавиатурный пользователь
-       видит, на каком варианте он находится */
-    .quiz-option:focus-within {
-      border-color: var(--accent-1);
-      background: #eef4ff;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
-    }
-
-    .quiz-option input[type="radio"] {
-      margin-top: 3px;
-      accent-color: var(--accent-1);
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-    }
-
-    .quiz-option:has(input:checked) {
-      border-color: var(--accent-1);
-      background: #eef4ff;
-    }
-
-    .quiz-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .quiz-result {
-      margin-top: 26px;
-      padding: 20px 22px;
-      border-radius: 12px;
-      background: #f0fdfa;
-      border: 2px solid var(--accent-2);
-      display: none;
-    }
-
-    .quiz-result.visible {
-      display: block;
-    }
-
-    .quiz-result:focus {
-      outline: 3px solid #5eead4;
-      outline-offset: 3px;
-    }
-
-    .quiz-result h3 {
-      color: var(--accent-2);
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-
-    .quiz-result p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    .quiz-result .result-project-name {
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .quiz-error {
-      color: #b91c1c;
-      font-size: 0.9rem;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .quiz-error.visible {
-      display: block;
-    }
+    .quiz-wrapper { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px 26px; max-width: 760px; margin: 0 auto; }
+    .quiz-step { margin-bottom: 26px; }
+    .quiz-step[hidden] { display: none; }
+    .quiz-step h3 { font-size: 1.05rem; margin-bottom: 14px; }
+    .quiz-step h3:focus { outline: none; }
+    .quiz-step h3:focus-visible { outline: 2px dashed var(--accent-1); outline-offset: 4px; border-radius: 4px; }
+    .quiz-progress { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.02em; }
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+    .quiz-option { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; font-size: 0.95rem; color: var(--text); background: #fafbfc; }
+    .quiz-option:hover { border-color: #93c5fd; background: #f0f7ff; }
+    .quiz-option:focus-within { border-color: var(--accent-1); background: #eef4ff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25); }
+    .quiz-option input[type="radio"] { margin-top: 3px; accent-color: var(--accent-1); flex-shrink: 0; width: 18px; height: 18px; }
+    .quiz-option:has(input:checked) { border-color: var(--accent-1); background: #eef4ff; }
+    .quiz-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 8px; }
+    .quiz-result { margin-top: 26px; padding: 20px 22px; border-radius: 12px; background: #f0fdfa; border: 2px solid var(--accent-2); display: none; }
+    .quiz-result.visible { display: block; }
+    .quiz-result:focus { outline: 3px solid #5eead4; outline-offset: 3px; }
+    .quiz-result h3 { color: var(--accent-2); font-size: 1.1rem; margin-bottom: 6px; }
+    .quiz-result p { font-size: 0.95rem; color: var(--text-muted); }
+    .quiz-result .result-project-name { font-weight: 700; color: var(--text); }
+    .quiz-error { color: #b91c1c; font-size: 0.9rem; margin-top: 10px; display: none; }
+    .quiz-error.visible { display: block; }
 
     /* ========== ФУТЕР ========== */
-    .site-footer {
-      background: #0f172a;
-      color: #cbd5e1;
-      padding: 40px 0 32px;
-      margin-top: 24px;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      text-align: center;
-    }
-
-    .footer-note {
-      font-size: 0.9rem;
-      max-width: 640px;
-      line-height: 1.6;
-      color: #b6c2d1; /* поднят контраст на тёмном фоне */
-    }
-
-    .footer-note strong {
-      color: #e2e8f0;
-    }
-
-    .footer-top-link {
-      display: inline-block;
-      padding: 10px 22px;
-      border-radius: 10px;
-      background: #1e293b;
-      color: #e2e8f0;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      border: 1px solid #334155;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .footer-top-link:hover,
-    .footer-top-link:focus-visible {
-      background: #334155;
-      border-color: #475569;
-      outline: 3px solid #93c5fd;
-      outline-offset: 2px;
-    }
+    .site-footer { background: #0f172a; color: #cbd5e1; padding: 40px 0 32px; margin-top: 24px; }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+    .footer-note { font-size: 0.9rem; max-width: 640px; line-height: 1.6; color: #b6c2d1; }
+    .footer-note strong { color: #e2e8f0; }
+    .footer-top-link { display: inline-block; padding: 10px 22px; border-radius: 10px; background: #1e293b; color: #e2e8f0; text-decoration: none; font-weight: 600; font-size: 0.92rem; border: 1px solid #334155; transition: background 0.2s, border-color 0.2s; }
+    .footer-top-link:hover, .footer-top-link:focus-visible { background: #334155; border-color: #475569; outline: 3px solid #93c5fd; outline-offset: 2px; }
 
     /* ========== АДАПТИВНЫЕ ДОПОЛНЕНИЯ ========== */
     @media (max-width: 480px) {
-      .section {
-        padding: 40px 0;
-      }
-      .hero {
-        padding: 48px 0 44px;
-      }
-      .card {
-        padding: 22px 18px;
-      }
-      .project-card {
-        padding: 22px 18px;
-      }
-      .quiz-wrapper {
-        padding: 24px 16px;
-      }
-      .hero-actions .btn {
-        flex: 1 1 auto;
-      }
-      .quiz-actions .btn {
-        flex: 1 1 auto;
-      }
+      .section { padding: 40px 0; }
+      .hero { padding: 48px 0 44px; }
+      .card { padding: 22px 18px; }
+      .project-card { padding: 22px 18px; }
+      .quiz-wrapper { padding: 24px 16px; }
+      .hero-actions .btn { flex: 1 1 auto; }
+      .quiz-actions .btn { flex: 1 1 auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ШАПКА С ЯКОРНОЙ НАВИГАЦИЕЙ -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#hero" class="logo" aria-label="DataStart — на главную">Data<span>Start</span></a>
@@ -704,16 +169,11 @@
   </header>
 
   <main>
-
-    <!-- ================= HERO ================= -->
     <section id="hero" class="hero">
       <div class="container">
         <span class="hero-badge">Учебный проект · для новичков</span>
         <h1>С чего начать в прикладном ИИ и анализе данных</h1>
-        <p>
-          Три понятных направления, честный разбор страхов новичка и три учебных проекта
-          с ориентировочными сроками. Выберите первый шаг, который подходит именно вам.
-        </p>
+        <p>Три понятных направления, честный разбор страхов новичка и три учебных проекта с ориентировочными сроками. Выберите первый шаг, который подходит именно вам.</p>
         <div class="hero-actions">
           <a href="#quiz" class="btn btn-primary">Выбрать первый проект</a>
           <a href="#projects" class="btn btn-secondary">Смотреть проекты</a>
@@ -721,125 +181,72 @@
       </div>
     </section>
 
-    <!-- ================= НАПРАВЛЕНИЯ ================= -->
     <section id="about" class="section">
       <div class="container">
         <h2 class="section-title">Что такое прикладной ИИ и анализ данных</h2>
-        <p class="section-subtitle">
-          Прикладной ИИ — это использование готовых инструментов и моделей для решения
-          практических задач. Анализ данных — работа с информацией, чтобы находить
-          закономерности и отвечать на вопросы. Ниже — три направления, с которых
-          чаще всего начинают.
-        </p>
+        <p class="section-subtitle">Прикладной ИИ — это использование готовых инструментов и моделей для решения практических задач. Анализ данных — работа с информацией, чтобы находить закономерности и отвечать на вопросы. Ниже — три направления, с которых чаще всего начинают.</p>
 
         <div class="card-grid">
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145506.png"
-                 alt="Иллюстрация к направлению «Анализ данных»">
+            <img class="card-img" src="photo1.png" alt="Анализ данных">
             <h3>Анализ данных</h3>
-            <p>
-              Работа с таблицами и открытыми наборами данных: очистка, сводные таблицы,
-              простые графики. Помогает отвечать на вопросы вида «что происходит?»
-              и «как это менялось?».
-            </p>
+            <p>Работа с таблицами и открытыми наборами данных: очистка, сводные таблицы, простые графики. Помогает отвечать на вопросы вида «что происходит?» и «как это менялось?».</p>
             <span class="card-tag tag-blue">Старт без математики</span>
           </article>
 
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145524.png"
-                 alt="Иллюстрация к направлению «Машинное обучение»">
+            <img class="card-img" src="photo2.png" alt="Машинное обучение">
             <h3>Машинное обучение</h3>
-            <p>
-              Обучение моделей на примерах: модель находит закономерности в данных
-              и делает прогнозы. Начинают с готовых библиотек и простых задач
-              классификации или регрессии.
-            </p>
+            <p>Обучение моделей на примерах: модель находит закономерности в данных и делает прогнозы. Начинают с готовых библиотек и простых задач классификации или регрессии.</p>
             <span class="card-tag tag-teal">Базовая математика</span>
           </article>
 
           <article class="card">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145543.png"
-                 alt="Иллюстрация к направлению «Нейросети»">
+            <img class="card-img" src="photo3.png" alt="Нейросети">
             <h3>Нейросети</h3>
-            <p>
-              Использование готовых нейросетевых моделей: распознавание изображений,
-              обработка текста, генерация. На старте не нужно обучать модель
-              с нуля — достаточно научиться её подключать.
-            </p>
+            <p>Использование готовых нейросетевых моделей: распознавание изображений, обработка текста, генерация. На старте не нужно обучать модель с нуля — достаточно научиться её подключать.</p>
             <span class="card-tag tag-amber">Интересно и наглядно</span>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ================= МИФЫ ================= -->
     <section id="myths" class="section section--alt">
       <div class="container">
         <h2 class="section-title">Мифы и страхи новичка</h2>
-        <p class="section-subtitle">
-          Честный разбор четырёх типичных опасений, которые мешают начать.
-        </p>
-
+        <p class="section-subtitle">Честный разбор четырёх типичных опасений, которые мешают начать.</p>
         <ul class="myth-list">
           <li class="myth-item">
             <p class="myth-q">«Мне нужно знать высшую математику»</p>
-            <p class="myth-a">
-              Для первых учебных проектов достаточно школьной арифметики и логики.
-              Сложные разделы математики понадобятся позже — и только если вы
-              захотите углубиться в разработку моделей.
-            </p>
+            <p class="myth-a">Для первых учебных проектов достаточно школьной арифметики и логики. Сложные разделы математики понадобятся позже — и только если вы захотите углубиться в разработку моделей.</p>
           </li>
           <li class="myth-item">
             <p class="myth-q">«Я не программировал(а) — у меня не получится»</p>
-            <p class="myth-a">
-              Первые проекты можно собрать по инструкции, понимая каждый шаг.
-              Программирование — навык, который развивается практикой; потребуется
-              время и регулярность, но начать можно с нуля.
-            </p>
+            <p class="myth-a">Первые проекты можно собрать по инструкции, понимая каждый шаг. Программирование — навык, который развивается практикой; потребуется время и регулярность, но начать можно с нуля.</p>
           </li>
           <li class="myth-item">
             <p class="myth-q">«Это слишком сложно и долго»</p>
-            <p class="myth-a">
-              Учебный проект-минимум реально завершить за несколько недель
-              в спокойном темпе. Важно выбрать посильный масштаб и не пытаться
-              сразу сделать «как у профессионалов».
-            </p>
+            <p class="myth-a">Учебный проект-минимум реально завершить за несколько недель в спокойном темпе. Важно выбрать посильный масштаб и не пытаться сразу сделать «как у профессионалов».</p>
           </li>
           <li class="myth-item">
             <p class="myth-q">«Нужны дорогие программы и мощный компьютер»</p>
-            <p class="myth-a">
-              Для учебных проектов из этого лендинга достаточно бесплатных
-              инструментов и обычного ноутбука. Платные API и сервисы не требуются.
-            </p>
+            <p class="myth-a">Для учебных проектов из этого лендинга достаточно бесплатных инструментов и обычного ноутбука. Платные API и сервисы не требуются.</p>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- ================= ПРОЕКТЫ ================= -->
     <section id="projects" class="section">
       <div class="container">
         <h2 class="section-title">Выбери свой первый проект</h2>
-        <p class="section-subtitle">
-          Три учебных проекта разной сложности. Время указано ориентировочно
-          и зависит от вашей подготовки и темпа.
-        </p>
+        <p class="section-subtitle">Три учебных проекта разной сложности. Время указано ориентировочно и зависит от вашей подготовки и темпа.</p>
 
         <div class="project-grid">
           <article class="project-card" id="project-dataset">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145506.png"
-                 alt="Иллюстрация к проекту «Анализ открытого датасета»">
+            <img class="card-img" src="photo1.png" alt="Анализ данных">
             <span class="project-level level-easy">Начальный</span>
             <h3>Анализ открытого датасета</h3>
-            <p>
-              Возьмите открытый набор данных (например, о погоде или книгах),
-              постройте несколько простых графиков и сформулируйте 3–5 выводов.
-              Осваиваются: загрузка данных, сводные таблицы, базовая визуализация.
-            </p>
+            <p>Возьмите открытый набор данных (например, о погоде или книгах), постройте несколько простых графиков и сформулируйте 3–5 выводов. Осваиваются: загрузка данных, сводные таблицы, базовая визуализация.</p>
             <div class="project-meta">
               <span>⏱ ~2–4 недели</span>
               <span>📊 Анализ данных</span>
@@ -848,16 +255,10 @@
           </article>
 
           <article class="project-card" id="project-chatbot">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145524.png"
-                 alt="Иллюстрация к проекту «Чат-бот на готовой модели»">
+            <img class="card-img" src="photo2.png" alt="Машинное обучение">
             <span class="project-level level-mid">Средний</span>
             <h3>Чат-бот на готовой модели</h3>
-            <p>
-              Соберите простого чат-бота, который отвечает на вопросы по небольшому
-              тексту, используя готовую открытую модель. Осваиваются: работа с API
-              (бесплатным), обработка текста, простая логика диалога.
-            </p>
+            <p>Соберите простого чат-бота, который отвечает на вопросы по небольшому тексту, используя готовую открытую модель. Осваиваются: работа с API (бесплатным), обработка текста, простая логика диалога.</p>
             <div class="project-meta">
               <span>⏱ ~3–5 недель</span>
               <span>🤖 Машинное обучение</span>
@@ -866,16 +267,10 @@
           </article>
 
           <article class="project-card" id="project-images">
-            <img class="card-img"
-                 src="Снимок%20экрана%202026-10-26%20145543.png"
-                 alt="Иллюстрация к проекту «Распознавание изображений»">
+            <img class="card-img" src="photo3.png" alt="Нейросети">
             <span class="project-level level-hard">Продвинутый старт</span>
             <h3>Распознавание изображений</h3>
-            <p>
-              Используйте готовую модель для классификации изображений (например,
-              отличать кошек от собак на открытом наборе). Осваиваются: подготовка
-              изображений, запуск готовой модели, оценка точности.
-            </p>
+            <p>Используйте готовую модель для классификации изображений (например, отличать кошек от собак на открытом наборе). Осваиваются: подготовка изображений, запуск готовой модели, оценка точности.</p>
             <div class="project-meta">
               <span>⏱ ~4–6 недель</span>
               <span>🧠 Нейросети</span>
@@ -886,22 +281,202 @@
       </div>
     </section>
 
-    <!-- ================= ТЕСТ ================= -->
     <section id="quiz" class="section section--alt">
       <div class="container">
         <h2 class="section-title">Какой проект подойдёт вам?</h2>
-        <p class="section-subtitle">
-          Ответьте на 4 вопроса — тест подскажет один из проектов выше.
-          Все вычисления происходят локально в браузере, данные никуда не отправляются.
-        </p>
+        <p class="section-subtitle">Ответьте на 4 вопроса — тест подскажет один из проектов выше. Все вычисления происходят локально в браузере, данные никуда не отправляются.</p>
 
         <div class="quiz-wrapper">
           <form id="quiz-form" novalidate>
-            <!-- ... остальное содержимое формы теста без изменений ... -->
+            <div class="quiz-step" data-step="0">
+              <p class="quiz-progress" aria-hidden="true">Шаг 1 из 4</p>
+              <h3 id="q1-heading" tabindex="-1">1. Насколько вам комфортна математика?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q1-heading">
+                <label class="quiz-option"><input type="radio" name="q1" value="1"><span>Хочу минимум формул — достаточно таблиц и графиков</span></label>
+                <label class="quiz-option"><input type="radio" name="q1" value="2"><span>Готов(а) разобраться с базовыми формулами</span></label>
+                <label class="quiz-option"><input type="radio" name="q1" value="3"><span>Интересно понять, как работают модели изнутри</span></label>
+              </div>
+            </div>
+
+            <div class="quiz-step" data-step="1" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 2 из 4</p>
+              <h3 id="q2-heading" tabindex="-1">2. Есть ли у вас опыт программирования?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q2-heading">
+                <label class="quiz-option"><input type="radio" name="q2" value="1"><span>Нет, но готов(а) учиться на простых примерах</span></label>
+                <label class="quiz-option"><input type="radio" name="q2" value="2"><span>Пробовал(а) немного, знаю базовые конструкции</span></label>
+                <label class="quiz-option"><input type="radio" name="q2" value="3"><span>Уверенно пишу небольшие программы</span></label>
+              </div>
+            </div>
+
+            <div class="quiz-step" data-step="2" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 3 из 4</p>
+              <h3 id="q3-heading" tabindex="-1">3. Что вам интереснее делать?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q3-heading">
+                <label class="quiz-option"><input type="radio" name="q3" value="1"><span>Искать закономерности в таблицах и цифрах</span></label>
+                <label class="quiz-option"><input type="radio" name="q3" value="2"><span>Создавать что-то интерактивное: ботов, диалоги</span></label>
+                <label class="quiz-option"><input type="radio" name="q3" value="3"><span>Работать с картинками и визуальными данными</span></label>
+              </div>
+            </div>
+
+            <div class="quiz-step" data-step="3" hidden>
+              <p class="quiz-progress" aria-hidden="true">Шаг 4 из 4</p>
+              <h3 id="q4-heading" tabindex="-1">4. Сколько времени вы готовы уделять проекту в неделю?</h3>
+              <div class="quiz-options" role="radiogroup" aria-labelledby="q4-heading">
+                <label class="quiz-option"><input type="radio" name="q4" value="1"><span>2–3 часа — хочу начать с малого</span></label>
+                <label class="quiz-option"><input type="radio" name="q4" value="2"><span>4–6 часов — готов(а) к регулярной работе</span></label>
+                <label class="quiz-option"><input type="radio" name="q4" value="3"><span>7+ часов — хочу погрузиться серьёзно</span></label>
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" id="quiz-back" class="btn btn-secondary" hidden>Назад</button>
+              <button type="button" id="quiz-next" class="btn btn-primary">Далее</button>
+              <button type="submit" id="quiz-submit" class="btn btn-primary" hidden>Показать результат</button>
+              <button type="button" id="quiz-reset" class="btn btn-secondary">Сбросить</button>
+            </div>
+
+            <p class="quiz-error" id="quiz-error" role="alert">Пожалуйста, выберите один вариант, чтобы продолжить.</p>
+
+            <div class="quiz-result" id="quiz-result" tabindex="-1" aria-live="polite">
+              <h3>Рекомендуемый проект</h3>
+              <p>Вам подойдёт: <span class="result-project-name" id="result-name"></span></p>
+              <p id="result-reason"></p>
+            </div>
           </form>
         </div>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container footer-inner">
+      <p class="footer-note"><strong>DataStart</strong> — учебный демонстрационный проект, созданный в образовательных целях. Это не коммерческое предложение и не реклама платных курсов. Все описания проектов носят учебный характер; сроки ориентировочные и зависят от подготовки. Данные теста обрабатываются только в вашем браузере и никуда не передаются.</p>
+      <a href="#hero" class="footer-top-link">↑ Наверх</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      const form = document.getElementById('quiz-form');
+      const resultBox = document.getElementById('quiz-result');
+      const resultName = document.getElementById('result-name');
+      const resultReason = document.getElementById('result-reason');
+      const errorBox = document.getElementById('quiz-error');
+      const resetBtn = document.getElementById('quiz-reset');
+      const nextBtn = document.getElementById('quiz-next');
+      const backBtn = document.getElementById('quiz-back');
+      const submitBtn = document.getElementById('quiz-submit');
+      const steps = Array.from(document.querySelectorAll('.quiz-step'));
+      let currentStep = 0;
+
+      const projectCards = {
+        dataset: document.getElementById('project-dataset'),
+        chatbot: document.getElementById('project-chatbot'),
+        images: document.getElementById('project-images')
+      };
+
+      const projectNames = {
+        dataset: '«Анализ открытого датасета» (начальный уровень)',
+        chatbot: '«Чат-бот на готовой модели» (средний уровень)',
+        images: '«Распознавание изображений» (продвинутый старт)'
+      };
+
+      function clearHighlights() {
+        Object.values(projectCards).forEach(function (card) { if (card) card.classList.remove('highlight'); });
+      }
+
+      function showResult(key, reason) {
+        clearHighlights();
+        resultName.textContent = projectNames[key];
+        resultReason.textContent = reason;
+        resultBox.classList.add('visible');
+        resultBox.focus();
+        const card = projectCards[key];
+        if (card) card.classList.add('highlight');
+      }
+
+      function showStep(index) {
+        steps.forEach(function (step, i) {
+          step.hidden = (i !== index);
+        });
+        const heading = steps[index].querySelector('h3');
+        if (heading) heading.focus();
+        currentStep = index;
+
+        backBtn.hidden = (index === 0);
+        if (index === steps.length - 1) {
+          nextBtn.hidden = true;
+          submitBtn.hidden = false;
+        } else {
+          nextBtn.hidden = false;
+          submitBtn.hidden = true;
+        }
+        errorBox.classList.remove('visible');
+      }
+
+      nextBtn.addEventListener('click', function () {
+        const currentRadio = form.querySelector('input[name="q' + (currentStep + 1) + '"]:checked');
+        if (!currentRadio) {
+          errorBox.classList.add('visible');
+          return;
+        }
+        showStep(currentStep + 1);
+      });
+
+      backBtn.addEventListener('click', function () {
+        if (currentStep > 0) showStep(currentStep - 1);
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const currentRadio = form.querySelector('input[name="q' + (currentStep + 1) + '"]:checked');
+        if (!currentRadio) {
+          errorBox.classList.add('visible');
+          return;
+        }
+
+        const answers = {};
+        let allAnswered = true;
+        ['q1', 'q2', 'q3', 'q4'].forEach(function (name) {
+          const checked = form.querySelector('input[name="' + name + '"]:checked');
+          if (checked) answers[name] = parseInt(checked.value, 10);
+          else allAnswered = false;
+        });
+
+        if (!allAnswered) {
+          errorBox.classList.add('visible');
+          return;
+        }
+
+        errorBox.classList.remove('visible');
+        const total = answers.q1 + answers.q2 + answers.q3 + answers.q4;
+        let key, reason;
+
+        if (answers.q3 === 3 && total >= 8) {
+          key = 'images';
+          reason = 'Вам интересна работа с картинками, и у вас достаточно времени и базовой подготовки, чтобы попробовать распознавание изображений. Помните: это ориентировочный старт, темп можно замедлить в любой момент.';
+        } else if (total <= 6) {
+          key = 'dataset';
+          reason = 'Сумма ваших ответов показывает, что комфортнее начать с самого доступного проекта — анализа открытого датасета. Здесь минимум формул и программирования, зато много наглядной практики.';
+        } else if (total <= 9) {
+          key = 'chatbot';
+          reason = 'Ваш профиль подходит для чат-бота на готовой модели: уже есть немного опыта или готовность разбираться, а интерес к интерактивным решениям делает этот проект хорошим первым шагом.';
+        } else {
+          key = 'images';
+          reason = 'Вы готовы к более серьёзному старту. Распознавание изображений потребует времени и практики, но у вас есть подходящий настрой и базовые предпосылки.';
+        }
+        showResult(key, reason);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        form.reset();
+        resultBox.classList.remove('visible');
+        clearHighlights();
+        showStep(0);
+        document.getElementById('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    })();
+  </script>
 </body>
 </html>
